@@ -6,6 +6,40 @@ html {
     scroll-behavior: smooth;
 }
 
+* {
+    scroll-behavior: smooth;
+}
+
+body {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+/* Enhanced smooth scrolling for webkit browsers */
+@supports (scroll-behavior: smooth) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+/* Custom scrollbar styling for webkit browsers */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000212;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #5e6ad2;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #7877c6;
+}
+
 .container-lg {
     @apply px-4 sm:container lg:px-0;
 }
