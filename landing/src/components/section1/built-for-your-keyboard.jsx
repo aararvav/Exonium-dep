@@ -19,7 +19,7 @@ const BuiltForYourKeyboard = () => {
   return (
     <Card className="col-[auto/span_4]">
       {/* Keyboard SVG */}
-      <div className="-mt-16 h-auto w-full [mask-image:linear-gradient(transparent_0%,rgba(0,0,0,0.57)_33.98%,black_100%)]">
+      <div className="-mt-8 mb-4 flex justify-center items-center w-full">
         <Keyboard />
       </div>
 

@@ -21,7 +21,7 @@ export default function Home() {
       <Section1 />
       <Section2 />
       <Section3 />
-      <Section4 />
+      {/* <Section4 /> */}
       <Section5 />
       <div className="pointer-events-none relative mx-auto -mt-64 h-[600px] w-full rotate-180 select-none overflow-hidden [mask-image:radial-gradient(circle,black,transparent_80%)] before:absolute before:inset-0 before:opacity-40 before:[background:radial-gradient(circle_at_bottom_center,#7877C6,transparent_70%)] after:absolute after:-left-1/2 after:top-1/2 after:aspect-[1/0.7] after:w-[200%] after:rounded-[50%] after:border-t after:border-[rgba(120,118,197,0.4)] after:bg-[#000212]">
         <Particles />
