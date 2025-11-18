@@ -155,6 +155,7 @@ export type ProjectType = {
   name: string;
   emoji: string;
   description: string;
+  profilePicture?: string | null;
   workspace: string;
   createdBy: {
     _id: string;
@@ -171,6 +172,7 @@ export type CreateProjectPayloadType = {
     emoji: string;
     name: string;
     description: string;
+    profilePicture?: string | null;
   };
 };
 
@@ -186,6 +188,7 @@ export type EditProjectPayloadType = {
     emoji: string;
     name: string;
     description: string;
+    profilePicture?: string | null;
   };
 };
 
@@ -251,6 +254,7 @@ export type TaskType = {
     _id: string;
     emoji: string;
     name: string;
+    profilePicture?: string | null;
   };
   priority: TaskPriorityEnumType;
   status: TaskStatusEnumType;

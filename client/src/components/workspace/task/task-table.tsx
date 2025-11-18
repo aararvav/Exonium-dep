@@ -136,8 +136,13 @@ const DataTableFilterToolbar: FC<DataTableFilterToolbarProps> = ({
   const projectOptions = projects?.map((project) => {
     return {
       label: (
-        <div className="flex items-center gap-1">
-          <span>{project.emoji}</span>
+        <div className="flex items-center gap-2">
+          <Avatar className="h-5 w-5">
+            <AvatarImage src={project.profilePicture || ""} alt={project.name} />
+            <AvatarFallback className="text-xs">
+              {project.emoji}
+            </AvatarFallback>
+          </Avatar>
           <span>{project.name}</span>
         </div>
       ),

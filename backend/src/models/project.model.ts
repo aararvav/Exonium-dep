@@ -4,6 +4,7 @@ export interface ProjectDocument extends Document {
   name: string;
   description: string | null; // Optional description for the project
   emoji: string;
+  profilePicture: string | null; // Optional profile picture for the project
   workspace: mongoose.Types.ObjectId;
   createdBy: mongoose.Types.ObjectId;
   createdAt: Date;
@@ -24,6 +25,11 @@ const projectSchema = new Schema<ProjectDocument>(
       default: "📊",
     },
     description: { type: String, required: false },
+    profilePicture: {
+      type: String,
+      required: false,
+      default: null,
+    },
     workspace: {
       type: Schema.Types.ObjectId,
       ref: "Workspace",

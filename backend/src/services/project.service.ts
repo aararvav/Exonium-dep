@@ -11,12 +11,14 @@ export const createProjectService = async (
     emoji?: string;
     name: string;
     description?: string;
+    profilePicture?: string | null;
   }
 ) => {
   const project = new ProjectModel({
     ...(body.emoji && { emoji: body.emoji }),
     name: body.name,
     description: body.description,
+    ...(body.profilePicture && { profilePicture: body.profilePicture }),
     workspace: workspaceId,
     createdBy: userId,
   });
@@ -59,7 +61,7 @@ export const getProjectByIdAndWorkspaceIdService = async (
   const project = await ProjectModel.findOne({
     _id: projectId,
     workspace: workspaceId,
-  }).select("_id emoji name description");
+  }).select("_id emoji name description profilePicture");
 
   if (!project) {
     throw new NotFoundException(
@@ -139,9 +141,10 @@ export const updateProjectService = async (
     emoji?: string;
     name: string;
     description?: string;
+    profilePicture?: string | null;
   }
 ) => {
-  const { name, emoji, description } = body;
+  const { name, emoji, description, profilePicture } = body;
 
   const project = await ProjectModel.findOne({
     _id: projectId,
@@ -157,6 +160,7 @@ export const updateProjectService = async (
   if (emoji) project.emoji = emoji;
   if (name) project.name = name;
   if (description) project.description = description;
+  if (profilePicture !== undefined) project.profilePicture = profilePicture;
 
   await project.save();
 

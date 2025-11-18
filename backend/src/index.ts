@@ -23,9 +23,9 @@ import taskRoutes from "./routes/task.route";
 const app = express();
 const BASE_PATH = config.BASE_PATH;
 
-app.use(express.json());
+app.use(express.json({ limit: '10mb' }));
 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 app.use(
   session({

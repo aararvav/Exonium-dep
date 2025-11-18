@@ -28,6 +28,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "../../ui/textarea";
 import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   getAvatarColor,
   getAvatarFallbackText,
@@ -37,7 +38,6 @@ import useWorkspaceId from "@/hooks/use-workspace-id";
 import { TaskPriorityEnum, TaskStatusEnum } from "@/constant";
 import useGetProjectsInWorkspaceQuery from "@/hooks/api/use-get-projects";
 import useGetWorkspaceMembers from "@/hooks/api/use-get-workspace-members";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { createTaskMutationFn } from "@/lib/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "@/hooks/use-toast";
@@ -69,8 +69,13 @@ export default function CreateTaskForm(props: {
   const projectOptions = projects?.map((project) => {
     return {
       label: (
-        <div className="flex items-center gap-1">
-          <span>{project.emoji}</span>
+        <div className="flex items-center gap-2">
+          <Avatar className="h-5 w-5">
+            <AvatarImage src={project.profilePicture || ""} alt={project.name} />
+            <AvatarFallback className="text-xs">
+              {project.emoji}
+            </AvatarFallback>
+          </Avatar>
           <span>{project.name}</span>
         </div>
       ),

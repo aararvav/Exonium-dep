@@ -7,6 +7,7 @@ import {
   Trash2,
 } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -155,7 +156,12 @@ export function NavProjects() {
                 <SidebarMenuItem key={item._id}>
                   <SidebarMenuButton asChild isActive={projectUrl === pathname}>
                     <Link to={projectUrl}>
-                      {item.emoji}
+                      <Avatar className="h-4 w-4">
+                        <AvatarImage src={item.profilePicture || ""} alt={item.name} />
+                        <AvatarFallback className="text-xs">
+                          {item.emoji}
+                        </AvatarFallback>
+                      </Avatar>
                       <span>{item.name}</span>
                     </Link>
                   </SidebarMenuButton>

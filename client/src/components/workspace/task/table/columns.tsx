@@ -89,7 +89,12 @@ export const getColumns = (projectId?: string): ColumnDef<TaskType>[] => {
 
               return (
                 <div className="flex items-center gap-1">
-                  <span className="rounded-full border">{project.emoji}</span>
+                  <Avatar className="h-6 w-6">
+                    <AvatarImage src={project.profilePicture || ""} alt={project.name} />
+                    <AvatarFallback className="text-xs">
+                      {project.emoji}
+                    </AvatarFallback>
+                  </Avatar>
                   <span className="block capitalize truncate w-[100px] text-ellipsis">
                     {project.name}
                   </span>

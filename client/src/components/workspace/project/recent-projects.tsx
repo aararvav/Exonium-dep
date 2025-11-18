@@ -54,9 +54,12 @@ const RecentProjects = () => {
                 className="grid gap-8 p-0"
               >
                 <div className="flex items-start gap-2">
-                  <div className="text-xl !leading-[1.4rem]">
-                    {project.emoji}
-                  </div>
+                  <Avatar className="h-8 w-8 mt-1">
+                    <AvatarImage src={project.profilePicture || ""} alt={project.name} />
+                    <AvatarFallback className="text-lg">
+                      {project.emoji}
+                    </AvatarFallback>
+                  </Avatar>
                   <div className="grid gap-1">
                     <p className="text-sm font-medium leading-none">
                       {project.name}

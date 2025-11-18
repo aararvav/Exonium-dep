@@ -18,13 +18,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "../../ui/textarea";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import EmojiPickerComponent from "@/components/emoji-picker";
 import { ProjectType } from "@/types/api.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useWorkspaceId from "@/hooks/use-workspace-id";
 import { editProjectMutationFn } from "@/lib/api";
 import { toast } from "@/hooks/use-toast";
-import { Loader } from "lucide-react";
+import { Loader, Camera } from "lucide-react";
 
 export default function EditProjectForm(props: {
   project?: ProjectType;
@@ -35,6 +36,7 @@ export default function EditProjectForm(props: {
   const queryClient = useQueryClient();
 
   const [emoji, setEmoji] = useState("📊");
+  const [profilePicture, setProfilePicture] = useState<string | null>(null);
 
   const projectId = project?._id as string;
 
@@ -43,6 +45,7 @@ export default function EditProjectForm(props: {
       message: "Project title is required",
     }),
     description: z.string().trim(),
+    profilePicture: z.string().url().optional().or(z.literal("")),
   });
 
   const { mutate, isPending } = useMutation({
@@ -54,19 +57,35 @@ export default function EditProjectForm(props: {
     defaultValues: {
       name: "",
       description: "",
+      profilePicture: "",
     },
   });
 
   useEffect(() => {
     if (project) {
       setEmoji(project.emoji);
+      setProfilePicture(project.profilePicture || null);
       form.setValue("name", project.name);
       form.setValue("description", project.description);
+      form.setValue("profilePicture", project.profilePicture || "");
     }
   }, [form, project]);
 
   const handleEmojiSelection = (emoji: string) => {
     setEmoji(emoji);
+  };
+
+  const handleProfilePictureChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const result = e.target?.result as string;
+        setProfilePicture(result);
+        form.setValue("profilePicture", result);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
@@ -120,9 +139,37 @@ export default function EditProjectForm(props: {
         </div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
+            {/* Profile Picture */}
+            <div className="mb-6 text-center">
+              <div className="relative inline-block">
+                <Avatar className="h-20 w-20 mx-auto">
+                  <AvatarImage 
+                    src={profilePicture || ""} 
+                    alt="Project profile"
+                  />
+                  <AvatarFallback className="text-4xl bg-gray-100">
+                    {emoji}
+                  </AvatarFallback>
+                </Avatar>
+                <label 
+                  htmlFor="profile-picture" 
+                  className="absolute bottom-0 right-0 bg-white border rounded-full p-1.5 shadow-sm cursor-pointer hover:bg-gray-50"
+                >
+                  <Camera className="h-3 w-3" />
+                </label>
+                <input
+                  id="profile-picture"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleProfilePictureChange}
+                  className="hidden"
+                />
+              </div>
+            </div>
+
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700">
-                Select Emoji
+                Select Emoji (Fallback)
               </label>
               <Popover>
                 <PopoverTrigger asChild>
