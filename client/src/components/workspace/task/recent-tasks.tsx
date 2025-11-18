@@ -61,13 +61,13 @@ const RecentTasks = () => {
             >
               {/* Task Info */}
               <div className="flex flex-col space-y-1 flex-grow">
-                <span className="text-sm capitalize text-gray-600 font-medium">
+                <span className="text-sm capitalize text-gray-600 dark:text-gray-300 font-medium">
                   {task.taskCode}
                 </span>
-                <p className="text-md font-semibold text-gray-800 truncate">
+                <p className="text-md font-semibold text-gray-800 dark:text-white truncate">
                   {task.title}
                 </p>
-                <span className="text-sm text-gray-500">
+                <span className="text-sm text-gray-500 dark:text-gray-400">
                   Due: {task.dueDate ? format(task.dueDate, "PPP") : null}
                 </span>
               </div>

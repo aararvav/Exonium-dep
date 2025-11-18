@@ -27,15 +27,15 @@ const WorkspaceDashboard = () => {
       </div>
       <WorkspaceAnalytics />
       <div className="mt-4">
-        <Tabs defaultValue="projects" className="w-full border rounded-lg p-2">
-          <TabsList className="w-full justify-start border-0 bg-gray-50 px-1 h-12">
-            <TabsTrigger className="py-2" value="projects">
+        <Tabs defaultValue="projects" className="w-full border rounded-lg p-2 bg-white dark:bg-gray-900">
+          <TabsList className="w-full justify-start border-0 bg-gray-50 dark:bg-gray-800 px-1 h-12">
+            <TabsTrigger className="py-2 dark:text-white" value="projects">
               Recent Projects
             </TabsTrigger>
-            <TabsTrigger className="py-2" value="tasks">
+            <TabsTrigger className="py-2 dark:text-white" value="tasks">
               Recent Tasks
             </TabsTrigger>
-            <TabsTrigger className="py-2" value="members">
+            <TabsTrigger className="py-2 dark:text-white" value="members">
               Recent Members
             </TabsTrigger>
           </TabsList>

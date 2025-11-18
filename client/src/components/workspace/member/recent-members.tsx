@@ -47,14 +47,14 @@ const RecentMembers = () => {
 
               {/* Member Details */}
               <div className="flex flex-col">
-                <p className="text-sm font-medium text-gray-900">
+                <p className="text-sm font-medium text-gray-900 dark:text-white">
                   {member.userId.name}
                 </p>
-                <p className="text-sm text-gray-500">{member.role.name}</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">{member.role.name}</p>
               </div>
 
               {/* Joined Date */}
-              <div className="ml-auto text-sm text-gray-500">
+              <div className="ml-auto text-sm text-gray-500 dark:text-gray-400">
                 <p>Joined</p>
                 <p>{member.joinedAt ? format(member.joinedAt, "PPP") : null}</p>
               </div>
