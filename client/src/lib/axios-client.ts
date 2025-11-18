@@ -16,6 +16,16 @@ API.interceptors.response.use(
     return response;
   },
   async (error) => {
+    // Handle cases where error.response might be undefined (network errors, timeouts, etc.)
+    if (!error.response) {
+      const customError: CustomError = {
+        ...error,
+        message: error.message || "Network error occurred",
+        errorCode: "NETWORK_ERROR",
+      };
+      return Promise.reject(customError);
+    }
+
     const { data, status } = error.response;
 
     if (data === "Unauthorized" && status === 401) {
@@ -24,6 +34,7 @@ API.interceptors.response.use(
 
     const customError: CustomError = {
       ...error,
+      message: data?.message || error.message || "An error occurred",
       errorCode: data?.errorCode || "UNKNOWN_ERROR",
     };
 
